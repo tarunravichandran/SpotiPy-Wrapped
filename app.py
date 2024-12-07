@@ -19,8 +19,8 @@ st.title("Show 5 Long-Term Top Tracks")
 # Check if the user is already logged in (token cached)
 token_info = auth_manager.get_cached_token()
 
-if token_info:
-    # Already have a token, user is logged in
+if token_info and not auth_manager.is_token_expired(token_info):
+    # Already have a valid token, user is logged in
     sp = spotipy.Spotify(auth_manager=auth_manager)
     # Fetch 5 long-term top tracks
     top_tracks_long = sp.current_user_top_tracks(limit=5, time_range="long_term")
@@ -28,7 +28,7 @@ if token_info:
     for idx, track in enumerate(top_tracks_long['items'], start=1):
         st.write(f"{idx}. {track['name']} by {track['artists'][0]['name']}")
 else:
-    # Not logged in yet, handle the OAuth flow
+    # Not logged in or token expired, handle the OAuth flow
     query_params = st.experimental_get_query_params()
     if "code" in query_params:
         # There's a code in the URL; exchange it for a token
