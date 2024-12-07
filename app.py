@@ -14,7 +14,7 @@ auth_manager = SpotifyOAuth(
     show_dialog=True,
 )
 
-st.title("Show 5 Long-Term Top Tracks")
+st.title("SpotiPY Wrapped - Top 5 Songs Since Day 1 of Spotify")
 
 # Function to fetch and display tracks
 def display_top_tracks():
