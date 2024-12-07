@@ -26,7 +26,11 @@ if token_info and not auth_manager.is_token_expired(token_info):
     top_tracks_long = sp.current_user_top_tracks(limit=5, time_range="long_term")
     st.write("Your top 5 long-term tracks:")
     for idx, track in enumerate(top_tracks_long['items'], start=1):
-        st.write(f"{idx}. {track['name']} by {track['artists'][0]['name']}")
+        track_name = track['name']
+        artist_name = track['artists'][0]['name']
+        album_cover_url = track['album']['images'][0]['url']  # URL of the cover image
+        st.image(album_cover_url, width=300)  # Display the cover image
+        st.write(f"**{idx}. {track_name}** by **{artist_name}**")  # Song name and artist
 else:
     # Not logged in or token expired, handle the OAuth flow
     query_params = st.experimental_get_query_params()
