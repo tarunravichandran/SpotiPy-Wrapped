@@ -12,7 +12,6 @@ auth_manager = SpotifyOAuth(
     redirect_uri=st.secrets["SPOTIPY_REDIRECT_URI"],
     scope=scope,
     show_dialog=True,
-    cache_path=".spotipyoauthcache"  # Cache token
 )
 
 st.title("Show 5 Long-Term Top Tracks")
